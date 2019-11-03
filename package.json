@@ -1,0 +1,27 @@
+{
+  "name": "music-stats",
+  "version": "1.0.0",
+  "description": "A web application and a collection of services for aggregation of various music stats",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RasterDX/acav.git"
+  },
+  "keywords": [
+    "music",
+    "stats"
+  ],
+  "author": "Razvan Maftei, Calin Timofte",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RasterDX/acav/issues"
+  },
+  "homepage": "https://github.com/RasterDX/acav#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.7.7"
+  }
+}
