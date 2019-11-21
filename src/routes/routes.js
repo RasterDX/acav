@@ -4,6 +4,7 @@ const router = app.Router();
 const indexController = require('../controllers/index-controller');
 
 // GET index page
-router.get('/', indexController.indexPage);
+router.get('/', indexController.index);
+router.get('/index', indexController.indexPage);
 
 module.exports = router;
