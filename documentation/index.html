@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Scholarly HTML</title>
+    <link rel="stylesheet" href="css/scholarly.min.css">
+    <script src="js/scholarly.min.js"></script>
+  </head>
+  <body prefix="schema: http://schema.org">
+    <header>
+      <div class="banner">
+        <img src="scholarly-html.svg" width="227" height="50" alt="Scholarly HTML logo">
+        <div class="status">Community Draft</div>
+      </div>
+      <h1>Scholarly HTML</h1>
+    </header>
+    <!--
+      XXX
+      - check refs
+      - the math example has too much maths
+      - bring back some of the old style
+      - make semantics, validation, processing sub-sections of each structural element
+      - have a section before that for general constructs
+        - explain why use RDFa
+        - explain our patterns: RDFa, roles
+      - figure captions need to get set throughout
+      - dedication? see doc-dedication
+      - syntactic constraints (prefix)
+      - needs more sthenurines
+      - examples of everything
+      - some notes on using Semantic CSS
+      - needs more RDFa in the spec itself
+    -->
+    <div role="contentinfo">
+      <dl>
+        <dt>Authors</dt>
+        <dd>
+          Razvan Maftei
+          &amp;
+          Calin Timofte
+        </dd>
+        <dt>License</dt>
+        <dd>
+          <a href="https://opensource.org/licenses/MIT">MIT</a>
+        </dd>
+      </dl>
+    </div>
+    <section typeof="sa:Abstract" id="abstract" role="doc-abstract">
+      <h2>Abstract</h2>
+      <p>
+        MusicStats is a Web Application that aggregates various music 
+        statistics and consumption patterns and makes them easy to visualize, 
+        either through an interactive map or as raw data through a public 
+        API.
+      </p>
+    </section>
+    <section id="introduction" role="doc-introduction">
+      <!-- review? -->
+      <h2>Introduction</h2>
+      <p>
+        According to <i>The Verge</i>, <a href="https://www.theverge.com/2019/9/6/20852568/streaming-revenue-growth-spotify-apple-music-industry-ariana-grande-drake-taylor-swift">streaming made up over 80% of the music industry's total revenue</a>,
+        far surpassing digital and physical music sales, which are now regarded as obsolete and outdated ways
+        of consuming music.
+      </p>
+      <p>
+        With so many streaming services competing over market share, it has become quite difficult
+        to obtain a general overview of the music landscape - it is evident that certain genres 
+        like <i>Pop</i> and <i>EDM</i> are incredibly popular on <i>Spotify</i>, while <i>Apple Music</i>
+        audiences tend to prefer genres such as <i>Hip-hop</i> and <i>Trap</i>.
+      </p>
+      <p>
+        MusicStats aims to bridge the divide between these services by <b>aggregating</b> the data and
+        <b>creating a visual model</b> that accurately correlates it to demographics, time periods and geographical
+        location.
+      </p>
+      <p>
+        We believe such a service could be incredibly useful for a large number of people, from music
+        enthusiasts who want to trace people with a similar music taste as theirs to music industry
+        executives looking to capitalize on a trend to artists trying to carve out a niche for themselves.
+      </p>
+      <p>
+        Our goals are to:
+      </p>
+      <ul>
+        <li>Allow the user to search for various statistics about songs, artists, genres etc.</li>
+        <li>Get/scrape data from streaming services.</li>
+        <li>Offer users an easy to understand visual representation of the data.</li>
+        <li>Offer data analysts a Public API that lets them access raw data.</li>
+      </ul>
+    </section>
+    <section id="structure">
+      <!-- review? -->
+      <h2>Structure</h2>
+      <p>
+        MusicStats is a Web Application based on the MVC architecture. It offers a Public API
+        as well as a User Interface.
+      </p>
+      <section id="Architecture">
+        <!-- review? -->
+        <h3>Application Overview</h3>
+        <p>
+          The diagram below presents an overview of the application and its architecture:
+        </p>
+        <img src="img/architecture.png" alt="architecture"/>
+        <p>
+          The application follows the <b>Model View Controller</b> pattern, having its 
+          functionalities divided in three layers:
+        </p>
+        <ul>
+          <li>The Model layer represents the data being sent to the <i>client</i> - in this particular case,
+              the relevant music statistics pertinent to the user's search criteria.</li>
+          <li><b>The View</b> layer represents what is shown to the client - it visualizes data from the 
+              server and makes it user-comprehensible. In this particular case, the view is best 
+              represented by the <i>Interactive Map</i> that plots the data received.</li>
+          <li><b>The Controller</b> layer ties them together, taking client requests and piping back 
+              the requested resources to the client. This layer also describes the collection of end-points
+              used by the REST API.</li>
+        </ul>
+        <p>The <i>business logic</i> of the application is in the <b>Services</b> layer where the 
+           the actual data collecting takes place.</p>
+        <p>The <b>Repository</b> layer is where application data is persisted. In the case of MusicStats,
+           the statistics that are created as per the client's request are cached for efficiency and 
+           to avoid redundant look-ups - the statistics are pruned after a time to make sure they're not
+           out of date.</p>
+      </section>
+      <section id="TechnologyStack">
+        <!-- review? -->
+        <h3>Technology Stack</h3>
+        <p>
+          MusicStats is an <i>ES6</i> application in its entirety - the server uses the <i>NodeJS</i> runtime
+          in conjunction with the <i>Express framework</i>. In addition, the server makes use of a non-relational 
+          database called <i>MongoDB</i> together with the <i>Mongoose ODM</i>.
+        </p>
+      </section>
+      <section id="clientServer">
+        <!-- review? -->
+        <h3>Client-Server Workflow</h3>
+        <p>
+          MusicStats is a <i>Single-Page Application</i>, meaning all the user interactions and the server responses 
+          are confined to a single "page" - more explicitly, the server doesn't work in the traditional sense where 
+          it would serve static HTML content for each page the user requests, but instead sends data over the HTTP 
+          protocol in <i>JSON</i> format.
+        </p>
+        <p>
+          Upon visiting the starting page, the user is sent a blank HTML file and <i>JavaScript</i> code That
+          fetches information from the server. Every user action sends an HTTP request over to the server,
+          who then responds, and the response is handled by the client code.
+        </p>
+        <p>Below is a diagram explaining the relationship between the <i>Client</i> and the <i>Server</i>:</p>
+        <img src="img/client-server-dynamic.png" alt="client-server-dynamic"/>
+      </section>
+        <section id="services">
+          <!-- review? -->
+          <h4>Server-side Services</h4>
+          <p>Below are the essential <i>Services</i> at the core of MusicStats:</p>
+          <section id="searchService">
+            <h5>ElasticSearchService (Server)</h5>
+            <code>
+              search(searchQuery: SearchQuery)
+            </code>
+            <p>The <code>SearchQuery</code> object has the following schema:</p>
+            <code>
+              SearchQuery {<br>
+                &nbsp;&nbsp;genre: string[],<br>
+                &nbsp;&nbsp;region: string[] (defaults to 'worldwide'),<br>
+                &nbsp;&nbsp;startPeriod: date,<br>
+                &nbsp;&nbsp;endPeriod: date,<br>
+                &nbsp;&nbsp;song: string,<br>
+                &nbsp;&nbsp;artist: string[],<br>
+                &nbsp;&nbsp;album: string,<br>
+                &nbsp;&nbsp;artistCountry: string,<br>
+                &nbsp;&nbsp;recordLabel: string,<br>
+                &nbsp;&nbsp;producers: string[],<br>
+                &nbsp;&nbsp;writers: string[]<br>
+              };
+            </code>
+            <p>All the parameters are nullable, but a <code>SearchQuery</code> is considered to be
+               redundant if it doesn't have at least one of the following parameters: <code>genre,
+               song, artist, album;</code>
+            </p>
+            <p>The function returns a <code>SearchResponse</code> object:</p>
+            <code>
+                SearchResponse {<br>
+                  &nbsp;&nbsp;searchQuery: SearchQuery,<br>
+                  &nbsp;&nbsp;data: [<br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;country: string,<br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;popularity: number,<br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;peakDate: date<br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;},<br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;...<br>
+                  &nbsp;&nbsp;]<br>
+                };
+              </code>
+              <p>
+                  The <code>popularity</code> field is determined using a formula that weighs streams 
+                  based on whether they're <i>free streams</i> or <i>paid streams</i>.
+                </p>
+                <p>
+                  First, <code>ElasticSearch</code> checks whether the <code>Search Query</code> has already 
+                  been cached in the database - if it has, the retrieval is super quick because there is no need 
+                  to fetch the data all over again.
+                </p>
+                <p>
+                  If the <code>SearchQuery</code> isn't in the Database, Elastic Search triggers the Scavenger Service 
+                  for data retrieval.
+              </p>
+          </section>
+          <section id="scavengerService">
+              <h5>ScavengerService</h5>
+              <code>scavenge(searchQuery: SearchQuery): SearchResponse</code>
+              <p><code>ScavengerService</code> deals with fetching data from public API's and/or web scraping
+                 to obtain a <code>SearchResponse</code> object.</p>
+              <p><code>ScavengerService</code> class has a member called <code>apiList</code>:</p>
+              <code>apiList = [<br>
+                    &nbsp;&nbsp;{<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;apiEndPoint: 'https://api.spotify.com/search',<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;requiredParams: string[],<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;responseBody: {...},<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;...<br>
+                    &nbsp;&nbsp;},<br>
+                    &nbsp;&nbsp;...<br>
+                    ];
+              </code>
+              <p>For each element of <code>apiList</code>, the scavenging service will attempt to fetch
+                 as much relevant data as possible and will aggregate it in the end and streamline it into 
+                 a cohesive <code>SearchResponse</code>.
+              </p>
+              <p>Upon obtaining a <code>SearchResponse</code>, the scavenging service caches it in the database.</p>
+            </section>
+        </section>
+        <section id="clientside-services">
+          <h4>Client-side Services</h4>
+          <section id="mapService">
+            <h5>MapService</h5>
+            <p><code>MapService</code> is a client-side service that deals with piping data to the interactive 
+                map. It sends the <code>SearchQuery</code> to the server and awaits a <code>SearchResponse</code> and 
+                can handle errors.
+            </p>
+          </section>
+          <section id="plotterService">
+            <h5>PlotterService</h5>
+            <p>Takes a <code>SearchResponse</code> and iterates through the <code>data</code> array plotting the 
+               results by country and modelling a graph to be projected onto the <i>Interactive Map</i>.</p>
+          </section>
+        </section>
+        <section id="clientComponents">
+          <h4>Client Components</h4>
+          <section id="mapComponent">
+            <h5>Map Component</h5>
+            <p>The Client-side App uses an SVG Map for data visualization. It will use a JavaScript library
+               for working with SVG Maps.
+            </p>
+          </section>
+        </section>
+        <section id="design">
+          <h4>Rough Design Sketch</h4>
+          <a href="img/rough-idea-thing.png" alt="design-map"><img style="width: 500px; height: 300px;" src="img/rough-idea-thing.png"/></a>
+        </section>
+      </section>
+      <section id="ExternalSources">
+        <h3>External Sources</h3>
+        <p>Below is a list of API's and Websites that MusicStats can use for gathering data:</p>
+        <ul>
+          <li><a href="https://developers.deezer.com/api/">Deezer</a> (API)</li>
+          <li><a href="https://www.theaudiodb.com/api_guide.php">TheaudioDB</a> (API and Web Scraping)</li>
+          <li><a href="https://developer.spotify.com/documentation/web-api/">Spotify</a> (API and Web Scraping)</li>
+          <li><a href="https://chartmasters.org/">ChartMasters</a> (Spotify streaming #'s)</li>
+          <li><a href="https://developers.soundcloud.com/docs/api/reference#tracks">SoundCloud</a></li>
+          <li><a href="https://www.discogs.com/developers/#">Discogs</a></li>
+          <li><a href="https://www.last.fm/api/">Last.fm</a></li>
+          <li><a href="https://developer.apple.com/documentation/applemusicapi">Apple Music</a> (regional country charts)</li>
+          <li><a href="https://api3.nextbigsound.com/">NextBigSound</a></li>
+          <li><a href="https://kworb.net/">Kworb.net</a> (web scraping)</li>
+          <li>and more...</li>
+        </ul>
+      </section>
+  </body>
+</html>
