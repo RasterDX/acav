@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Scholarly HTML</title>
+    <title>MusicStats Documentation</title>
     <link rel="stylesheet" href="css/scholarly.min.css">
     <script src="js/scholarly.min.js"></script>
   </head>
@@ -13,7 +13,7 @@
         <img src="scholarly-html.svg" width="227" height="50" alt="Scholarly HTML logo">
         <div class="status">Community Draft</div>
       </div>
-      <h1>Scholarly HTML</h1>
+      <h1>MusicStats</h1>
     </header>
     <!--
       XXX
@@ -206,6 +206,11 @@
                   If the <code>SearchQuery</code> isn't in the Database, Elastic Search triggers the Scavenger Service 
                   for data retrieval.
               </p>
+              <p>The Service also correlates the <code>SearchQuery</code> to other documents in the Database with 
+                 similar parameters - for example, if the <code>SearchQuery</code> contains multiple genres, the 
+                 service will aggregate data from all the records in the Database containing one of those genres and 
+                 weighs them appropriately for generating statistics such as "people who listen to Pop-Rock also listen to 
+                 Psychedelic Rock, Trance etc."</p>
           </section>
           <section id="scavengerService">
               <h5>ScavengerService</h5>
@@ -275,6 +280,44 @@
           <li><a href="https://kworb.net/">Kworb.net</a> (web scraping)</li>
           <li>and more...</li>
         </ul>
+      </section>
+      <section id="api">
+        <h3>API</h3>
+        <code>End-point: api/search</code><br>
+        <code>Request type: GET</code>
+        <p>Request</p>
+        <code>
+          Content-Type: application/json<br>
+          body: {<br>
+            &nbsp;&nbsp;genre: string[],<br>
+            &nbsp;&nbsp;region: string[] (defaults to 'worldwide'),<br>
+            &nbsp;&nbsp;startPeriod: date,<br>
+            &nbsp;&nbsp;endPeriod: date,<br>
+            &nbsp;&nbsp;song: string,<br>
+            &nbsp;&nbsp;artist: string[],<br>
+            &nbsp;&nbsp;album: string,<br>
+            &nbsp;&nbsp;artistCountry: string,<br>
+            &nbsp;&nbsp;recordLabel: string,<br>
+            &nbsp;&nbsp;producers: string[],<br>
+            &nbsp;&nbsp;writers: string[]<br>
+          };
+        </code>
+        <p>Response</p>
+          <code>
+            Content-Type: application/json<br>
+            status: 200 OK<br>
+            body {<br>
+              &nbsp;&nbsp;searchQuery: SearchQuery,<br>
+              &nbsp;&nbsp;data: [<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;country: string,<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;popularity: number,<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;peakDate: date<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;},<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;...<br>
+              &nbsp;&nbsp;]<br>
+            };
+          </code>
       </section>
   </body>
 </html>
