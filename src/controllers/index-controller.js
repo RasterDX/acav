@@ -7,7 +7,7 @@ exports.index = function(req, res) {
 };
 
 exports.indexPage = function(req, res) {
-    res.type('.html');
-    const htmlContent = fs.readFileSync("client/fragments/loading.html", "utf-8");
+    res.set('Content-Type', 'text/html');
+    const htmlContent = fs.readFileSync("client/fragments/map.html", "utf-8");
     res.send(htmlContent);
 }

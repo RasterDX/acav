@@ -1,7 +1,7 @@
 rootUrl = 'http://localhost:3000';
 
 function render(htmlContent) {
-    document.querySelector("html").innerHTML = htmlContent;
+    document.querySelector(".content").innerHTML = htmlContent;
 }
 
 function setLoading(status = false) {
