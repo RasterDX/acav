@@ -62,3 +62,9 @@ typings/
 
 # misc
 .DS_Store
+
+# build directory where TS is transpiled to JS
+build
+
+# package-lock
+package-lock.json

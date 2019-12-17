@@ -1,0 +1,14 @@
+{
+  "name": "scavenger-service",
+  "version": "1.0.0",
+  "description": "A microservice that scrapes and gathers music data from various sources.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Razvan Maftei, Calin Timofte",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
