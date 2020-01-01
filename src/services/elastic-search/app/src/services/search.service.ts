@@ -16,6 +16,7 @@ export class SearchService {
     if (!result.length) {
       return ErrorFactory.generateError('404_NO_RECORD_FOUND');
     }
+    /*  If it gets to here, it means we should start the data scavenging  */
     return result;
   }
 

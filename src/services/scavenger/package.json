@@ -4,11 +4,17 @@
   "description": "A microservice that scrapes and gathers music data from various sources.",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tsc": "tsc",
+    "dev": "ts-node-dev --respawn --transpileOnly ./app/app.ts",
+    "prod": "tsc && node ./build/app.js"
   },
   "author": "Razvan Maftei, Calin Timofte",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.17.1"
+    "@types/express": "^4.17.2",
+    "express": "^4.17.1",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "typescript": "^3.7.3"
   }
 }
