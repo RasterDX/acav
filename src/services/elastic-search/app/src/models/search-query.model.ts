@@ -10,26 +10,33 @@ export class SearchQuery implements Deserializable {
   artists!: string[];
   album!: string;
   artistCountry!: string;
-  recordLabel!: string;
-  producers!: string;
-  writers!: string;
 
   constructor() {}
 
   public deserialize(input: any): Promise<SearchQuery> {
-    this.genre = input.genre;
-    this.region = input.region;
-    this.startPeriod = input.startPeriod;
-    this.endPeriod = input.endPeriod;
-    this.song = input.song;
-    this.artists = input.artists;
-    this.album = input.album;
-    this.artistCountry = input.artistCountry;
-    this.recordLabel = input.recordLabel;
-    this.producers = input.producers;
-    this.writers = input.writers;
+    this.genre = input.genre || null;
+    this.region = input.region || null;
+    this.startPeriod = input.startPeriod || null;
+    this.endPeriod = input.endPeriod || null;
+    this.song = input.song || null;
+    this.artists = input.artists || null;
+    this.album = input.album || null;
+    this.artistCountry = input.artistCountry || null;
     return SmartQueryParser.validateQuery(this)
       .then((response: SearchQuery) => response)
       .catch(err => {throw err});
+  }
+
+  public serialize(): any {
+    return {
+      genre: this.genre,
+      region: this.region,
+      startPeriod: this.startPeriod,
+      endPeriod: this.endPeriod,
+      song: this.song,
+      artists: this.artists,
+      album: this.album,
+      artistCountry: this.artistCountry
+    };
   }
 }
