@@ -87,3 +87,45 @@ form {
 .map-div img {
     max-width: 1200px;
 }
+
+#select-box{
+    display: flex;
+}
+
+#select-box > *{
+    border:0px;
+   outline:0px;
+}
+
+#select-categories{
+    background-color: transparent;
+}
+
+#select-categories:hover{
+    background-color: #e4e4e4;
+}
+
+#select-box button{
+    background-color: transparent;
+    border: 0;
+    font-size: 10pt;
+    padding: 5px 15px;
+}
+
+#select-box button:hover{
+    background-color: #e4e4e4;
+}
+
+.querry-option{
+    display: flex;
+}
+
+.querry-option > *{
+    border:0px;
+   outline:0px;
+   background-color: transparent;
+}
+
+.querry-option input:hover, button:hover{
+    background-color: #e4e4e4;
+}

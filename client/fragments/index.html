@@ -3,6 +3,7 @@
     <head>
         <title>MusicStats</title>
         <link rel="stylesheet" type="text/css" href="../style/style.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body>
         <div class="header">
@@ -10,7 +11,21 @@
         </div>
         <div class="search-container">
                 <form class="searchbar">
-                    <input type="text" placeholder="Enter search query e.g. Blues, 90s etc."></input>
+                    <!-- <input type="text" placeholder="Enter search query"></input> -->
+                    <div id="select-box">
+                        <select id="select-categories">
+                            <option value="" disabled selected>Add term</option>
+                            <option value="artist">Artist</option>
+                            <option value="song">Song</option>
+                            <option value="album">Album</option>
+                            <option value="genre">Genre</option>
+                            <option value="start period">Start Period</option>
+                            <option value="end period">End Period</option>
+                            <option value="artist country">Artist Country</option>
+                            <option value="region">Region</option>
+                        </select>
+                        <button type="button" id="add-term_button"><i class="fa fa-plus-square-o"></i></button>
+                    </div>
                     <input class="search-button" type="submit"></input>
                 </form>
         </div>
