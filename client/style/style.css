@@ -50,6 +50,8 @@ form {
     background-color: transparent;
     border: 0;
     border-radius: 0 10px 10px 0;
+    flex-grow: 0.5;
+    flex-basis: 15%;
 }
 
 .searchbar .search-button img {
@@ -90,6 +92,7 @@ form {
 
 #select-box{
     display: flex;
+    flex-grow: 1;
 }
 
 #select-box > *{
@@ -118,6 +121,8 @@ form {
 
 .querry-option{
     display: flex;
+    flex-grow: 1;
+    border: 1px;
 }
 
 .querry-option > *{

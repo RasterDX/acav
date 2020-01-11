@@ -1,5 +1,6 @@
 rootUrl = 'http://localhost:3000';
 add_button = document.getElementById('add-term_button');
+placeholder_is_hidden = 0;
 
 function render(htmlContent) {
     document.querySelector(".content").innerHTML = htmlContent;
@@ -28,6 +29,9 @@ add_button.addEventListener('click', function(){
     var type = document.createAttribute('type');
     type.value = 'button';
     button.setAttributeNode(type);
+    button.addEventListener('click', function(){
+        button.parentNode.remove();
+    });
 
     var icon = document.createElement('i');
     var icon_class = document.createAttribute('class');
@@ -37,7 +41,7 @@ add_button.addEventListener('click', function(){
 
     var textarea = document.createElement("input");
     var text_type = document.createAttribute('type');
-    type.value = 'text';
+    text_type.value = 'text';
     // var placeholder = document.createAttribute('placeholder');
     // placeholder.value = 'Type here';
     textarea.setAttributeNode(text_type);
@@ -47,5 +51,10 @@ add_button.addEventListener('click', function(){
     newDiv.appendChild(text);
     newDiv.appendChild(textarea);
     newDiv.appendChild(button);
-    console.log("I'm here");
+    if (placeholder_is_hidden == 0){
+        placeholder_is_hidden = 1;
+        var hide = document.createAttribute('style');
+        hide.value = 'display: none';
+        document.getElementById("placeholder").setAttributeNode(hide);
+    }
 })
