@@ -117,11 +117,11 @@ search_form.addEventListener('submit', function(e){
         }
     })
     fetch(submitURL, {
-        method: 'GET',
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON_to_send
+        body: JSON.stringify(JSON_to_send)
       }).then(function(response){
 
       });
