@@ -7,7 +7,7 @@ export class SearchQuery implements Deserializable {
   startPeriod!: Date;
   endPeriod!: Date;
   song!: string;
-  artists!: string[];
+  artist!: string;
   album!: string;
   artistCountry!: string;
 
@@ -19,7 +19,7 @@ export class SearchQuery implements Deserializable {
     this.startPeriod = input.startPeriod || null;
     this.endPeriod = input.endPeriod || null;
     this.song = input.song || null;
-    this.artists = input.artists || null;
+    this.artist = input.artist || null;
     this.album = input.album || null;
     this.artistCountry = input.artistCountry || null;
     return SmartQueryParser.validateQuery(this)
@@ -34,7 +34,7 @@ export class SearchQuery implements Deserializable {
       startPeriod: this.startPeriod,
       endPeriod: this.endPeriod,
       song: this.song,
-      artists: this.artists,
+      artist: this.artist,
       album: this.album,
       artistCountry: this.artistCountry
     };

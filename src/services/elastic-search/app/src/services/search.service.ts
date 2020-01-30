@@ -1,6 +1,6 @@
 import { SearchQuery } from "../models/search-query.model";
 import { Repository } from "../repository/dbhook";
-import { ErrorFactory } from "../errors/error-factory";
+const axios = require('axios');
 
 export class SearchService {
 
@@ -9,15 +9,16 @@ export class SearchService {
   constructor() {}
 
   static async search(input: SearchQuery) {
-    const result = await this.repository.find(input);
-    if (ErrorFactory.ERROR_STRINGS.includes(result)) {
-      return ErrorFactory.generateError(result);
-    }
-    if (!result.length) {
-      return ErrorFactory.generateError('404_NO_RECORD_FOUND');
-    }
+    let result = await this.repository.find(input);
+
     /*  If it gets to here, it means we should start the data scavenging  */
-    return result;
+    let searchResult = await axios.post('http://localhost:3010', input).then(
+      (response: any) => {
+        return response;
+      }
+    ).catch(
+    )
+    return await searchResult;
   }
 
   static generateQuery(input: any) {

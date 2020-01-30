@@ -4,7 +4,9 @@ export class SmartQueryParser {
   static validateQuery(searchQuery: SearchQuery): Promise<SearchQuery> {
     return new Promise<SearchQuery>((resolve, reject) => {
       if (
-        (searchQuery.artists && (searchQuery.song || searchQuery.album)) ||
+        (searchQuery.artist && searchQuery.region) ||
+        (searchQuery.song && searchQuery.region) ||
+        (searchQuery.album && searchQuery.region) ||
         (searchQuery.genre && searchQuery.region)
       ) {
         resolve(searchQuery);
