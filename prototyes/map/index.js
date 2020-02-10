@@ -55,13 +55,18 @@ var data = [{
             color: 'black'
         }
     },
-    name: 'world data'
+    name: 'world data',
+    text: []
 }];
+
 const data_arr = json.data;
+var label_dict = []
 for(var i = 0; i < data_arr.length; i++){
     data[0].marker.size[i] = data_arr[i].popularity+10;
     data[0].marker.color[i] = data_arr[i].popularity;
+    label_dict[i] = String(data[0].marker.size[i] - 10)
 }
+data[0].text = label_dict;
 
 var layout = {
     title: 'Test',
