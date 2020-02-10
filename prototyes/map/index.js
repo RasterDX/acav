@@ -1,24 +1,67 @@
+//json stores the recieved json
+var json = {
+    searchQuery: {
+        song: "Mr. Brightside",
+        regions: ["IND", "USA", "CAN", "AUS", "BRA"]
+    },
+    data: [
+      {
+        country: "IND",
+        popularity: 5
+      },
+      {
+        country: "USA",
+        popularity: 17
+      },
+      {
+        country: "CAN",
+        popularity: 12
+      },
+      {
+        country: "AUS",
+        popularity: 14
+      },
+      {
+        country: "BRA",
+        popularity: 0
+      }
+    ],
+    features: {
+      instrumentalness: 82,
+      danceability: 84,
+      acousticness: 82,
+      genre: "Pop, Rock, Indie, Alternative",
+      artist: "The Killers",
+      album: "Mr Brightside (CD2 - E Release)",
+      released: 2003
+    }
+  };
+
+function plot(json){
 var data = [{
     type: 'scattergeo',
     mode: 'markers',
-    locations: ['FRA', 'DEU', 'RUS', 'ESP'],
+    locations: json.searchQuery.regions.slice(),
     marker: {
-        size: [20, 30, 15, 10],
-        color: [10, 20, 40, 50],
+        size: json.searchQuery.regions.slice(),
+        color: json.searchQuery.regions.slice(),
         cmin: 0,
-        cmax: 50,
-        colorscale: 'Greens',
+        cmax: 100,
+        colorscale: 'Reds',
         colorbar: {
-            title: 'Some rate',
-            ticksuffix: '%',
-            showticksuffix: 'last'
+            title: 'Popularity'
         },
         line: {
             color: 'black'
         }
     },
-    name: 'europe data'
+    name: 'world data'
 }];
+const data_arr = json.data;
+for(var i = 0; i < data_arr.length; i++){
+    data[0].marker.size[i] = data_arr[i].popularity+10;
+    data[0].marker.color[i] = data_arr[i].popularity;
+}
 
 var layout = {
     title: 'Test',
@@ -41,3 +84,6 @@ var layout = {
 };
 
 Plotly.plot("myDiv", data, layout, {showLink: false});
+}
+// debugger
+plot(json);
