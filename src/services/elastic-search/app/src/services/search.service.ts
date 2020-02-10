@@ -12,13 +12,12 @@ export class SearchService {
     let result = await this.repository.find(input);
 
     /*  If it gets to here, it means we should start the data scavenging  */
-    let searchResult = await axios.post('http://localhost:3010', input).then(
+    return  axios.post('http://localhost:3010', input).then(
       (response: any) => {
         return response;
       }
     ).catch(
     )
-    return await searchResult;
   }
 
   static generateQuery(input: any) {

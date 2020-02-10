@@ -35,6 +35,7 @@ export class ErrorFactory {
           "There was a server error and the request could not be processed."
         );
       default:
+        console.log(code);
         return new Error(
           400,
           "Invalid Query",
