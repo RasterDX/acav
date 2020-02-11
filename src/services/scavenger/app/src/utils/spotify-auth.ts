@@ -2,6 +2,10 @@ const axios = require('axios');
 const qs = require('querystring')
 
 export class SpotifyUtils {
+
+    static readonly getArtistEndpoint: string = 'https://api.spotify.com/v1/artists/';
+    static readonly getAlbumsEndpoint: string = 'https://api.spotify.com/v1/albums/';
+
     static getAuth(clientId: string, clientSecret: string): Promise<any> {
         const body = {
             'grant_type': 'client_credentials'
@@ -13,7 +17,7 @@ export class SpotifyUtils {
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'Authorization': `Basic ${base64}`
             }
-        }
+        };
         return axios.post('https://accounts.spotify.com/api/token', qs.stringify(body), config)
             .then((response: any) => {
                 return response.data.access_token;
@@ -30,7 +34,7 @@ export class SpotifyUtils {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${accessToken}`
             }
-        }
+        };
         return axios.get(endpoint + '?' + qs.stringify({q, type, market}), config)
             .then((response: any) => {
                 return response;
@@ -47,8 +51,42 @@ export class SpotifyUtils {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${accessToken}`
             }
-        }
+        };
         return axios.get(endpoint+id, config)
+            .then((response: any) => {
+                return response;
+            })
+            .catch((error: any) => {
+                console.log(error.response);
+            });
+    }
+
+    static getArtist(accessToken: string, id: string) {
+        const config = {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            }
+        };
+        return axios.get(SpotifyUtils.getArtistEndpoint+id, config)
+            .then((response: any) => {
+                return response;
+            })
+            .catch((error: any) => {
+                console.log(error.response);
+            });
+    }
+
+    static getAlbum(accessToken: string, id: string) {
+        const config = {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            }
+        };
+        return axios.get(SpotifyUtils.getAlbumsEndpoint+id, config)
             .then((response: any) => {
                 return response;
             })

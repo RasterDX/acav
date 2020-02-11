@@ -92,22 +92,10 @@ form {
     display: flex;
 }
 
-#select-box > *{
-    border:0px;
-   outline:0px;
-}
-
-#select-categories{
-    background-color: transparent;
-}
-
-#select-categories:hover{
-    background-color: #e4e4e4;
-}
-
 #select-box button{
     background-color: transparent;
     border: 0;
+    outline: 0;
     font-size: 10pt;
     padding: 5px 15px;
 }
@@ -118,14 +106,99 @@ form {
 
 .querry-option{
     display: flex;
+    margin: 0 5px;
 }
 
-.querry-option > *{
-    border:0px;
-   outline:0px;
-   background-color: transparent;
+.querry-option > button {
+    background-color: transparent;
+    outline: none;
+    border: none;
 }
 
-.querry-option input:hover, button:hover{
-    background-color: #e4e4e4;
+.querry-option {
+    border: 1px;
+   border-radius: 6px;
+   padding: 0 9px;
+   background-color: #63aaa0;
+   color: #ffffff;
+}
+
+.querry-option:hover {
+    background-color: #5b9c94;
+}
+
+.results {
+    display: flex;
+    flex-flow: row;
+    justify-content: flex-start;
+    margin: 30px 90px;
+}
+
+.artwork {
+    width: 480px;
+    height: 480px;
+    background-size: cover;
+}
+
+.info {
+    display: flex;
+    flex-flow: column;
+    margin: 15px 40px;
+}
+
+.floating-container {
+    display: none;
+    margin: 30px 90px;
+    display: flex;
+    flex-flow: row;
+}
+
+.column-container {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+}
+
+#similartracks {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.userimg {
+    width: 150px;
+    height: 150px;
+}
+
+.agetab {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.genre-verdict {
+    display: flex;
+    justify-content: center;
+    margin: 30px;
+}
+
+.genre-pool {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.genre-pool > span {
+    font-size: 2em;
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: underline;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 60px;
 }

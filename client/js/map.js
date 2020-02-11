@@ -1,43 +1,53 @@
-const data = [{
-    type: 'scattergeo',
-    mode: 'markers',
-    locations: ['FRA', 'DEU', 'RUS', 'ESP'],
-    marker: {
-        size: [20, 30, 15, 10],
-        color: [10, 20, 40, 50],
-        cmin: 0,
-        cmax: 50,
-        colorscale: 'Greens',
-        colorbar: {
-            title: 'Some rate',
-            ticksuffix: '%',
-            showticksuffix: 'last'
+function plot(json) {
+    var data = [{
+        type: 'scattergeo',
+        mode: 'markers',
+        locations: json.searchQuery.region.slice(),
+        marker: {
+            size: json.searchQuery.region.slice(),
+            color: json.searchQuery.region.slice(),
+            cmin: 0,
+            cmax: 100,
+            colorscale: 'Reds',
+            colorbar: {
+                title: 'Popularity'
+            },
+            line: {
+                color: 'black'
+            }
         },
-        line: {
-            color: 'black'
-        }
-    },
-    name: 'europe data'
-}];
+        name: 'world data',
+        text: []
+    }];
 
-const layout = {
-    title: 'Test',
-    showlegend: false,
-    width: 1500,
-    height: 600,
-    geo: {
-        scope: 'world',
-        projection: {
-            type: 'equirectangular'
+    const data_arr = json.data;
+    var label_dict = []
+    for (var i = 0; i < data_arr.length; i++) {
+        data[0].marker.size[i] = data_arr[i].popularity + 10;
+        data[0].marker.color[i] = data_arr[i].popularity;
+        label_dict[i] = String(data[0].marker.size[i] - 10)
+    }
+    data[0].text = label_dict;
+
+    var layout = {
+        title: 'Test',
+        showlegend: false,
+        width: 1500,
+        height: 600,
+        geo: {
+            scope: 'world',
+            projection: {
+                type: 'equirectangular'
+            },
+            resolution: 110,
+            showland: true,
+            landcolor: 'rgb(217, 217, 217)',
+            subunitwidth: 1,
+            countrywidth: 1,
+            subunitcolor: 'rgb(255,255,255)',
+            countrycolor: 'rgb(255,255,255)'
         },
-        resolution: 110,
-        showland: true,
-        landcolor: 'rgb(217, 217, 217)',
-        subunitwidth: 1,
-        countrywidth: 1,
-        subunitcolor: 'rgb(255,255,255)',
-        countrycolor: 'rgb(255,255,255)'
-    },
-};
+    };
 
-Plotly.plot("myDiv", data, layout, {showLink: false});
+    Plotly.plot("myDiv", data, layout, { showLink: false });
+}

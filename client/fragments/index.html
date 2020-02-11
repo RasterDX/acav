@@ -18,10 +18,6 @@
                             <option value="artist">Artist</option>
                             <option value="song">Song</option>
                             <option value="album">Album</option>
-                            <option value="genre">Genre</option>
-                            <option value="start period">Start Period</option>
-                            <option value="end period">End Period</option>
-                            <option value="artist country">Artist Country</option>
                             <option value="region">Region</option>
                         </select>
                         <button type="button" id="add-term_button"><i class="fa fa-plus-square-o"></i></button>
@@ -32,6 +28,51 @@
         <main class="content">
 
         </main>
+        <div class="results">
+            <div class="artwork"></div>
+            <div class="info"></div>
+        </div>
+
+        <div class="floating-container">
+            <div class="column-container">
+                <h1>Sonical Analysis</h1>
+                <div class="genre-verdict">
+                    <h2>Fans of the following genres are very likely to love this song:</h2>
+                </div>
+                <div class="genre-verdict">
+                    <div class="genre-pool"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="floating-container">
+            <div class="column-container">
+                <h1>Demographic Breakdown</h1>
+                <p>Based on this track's metadata and genre, here's how various demographics react to it:</p>
+                <div class="agetab">
+                    <img class="userimg" src="../static/young.png"/>
+                    <span id="youthpref"></span>
+                </div>
+                <div class="agetab">
+                    <img class="userimg" src="../static/semior.png"/>
+                    <span id="seniorpref"></span>
+                </div>
+                <div id="demoline"></div>
+            </div>
+        </div>
+
+        <div class="floating-container">
+            <div class="column-container">
+                &nbsp;
+            </div>
+            <div class="column-container">
+                <h1>Similar Tracks</h1>
+                <div id="similartracks"></div>
+            </div>
+        </div>
+        <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
         <script src="../js/index.js"></script>
+        <script src='../js/map.js'></script>
+        <script src="../js/country-mapper.js"></script>
     </body>
 </html>

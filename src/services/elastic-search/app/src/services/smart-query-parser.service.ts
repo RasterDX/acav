@@ -3,6 +3,7 @@ import { SearchQuery } from "../models/search-query.model";
 export class SmartQueryParser {
   static validateQuery(searchQuery: SearchQuery): Promise<SearchQuery> {
     return new Promise<SearchQuery>((resolve, reject) => {
+      console.log(searchQuery);
       if (
         (searchQuery.artist && searchQuery.region) ||
         (searchQuery.song && searchQuery.region) ||
